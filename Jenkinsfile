@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'shivam193/docker:90'
-        DOCKER_CREDENTIALS = credentials('docker_credential') // Jenkins credentials ID
-        KUBECONFIG = 'D:\\Users\\DELL\\Desktop\\JENKINSFOLDER\\.kube\\config'
+        DOCKER_CREDENTIALS = credentials('docker_credential')
     }
 
     stages {
@@ -21,12 +20,6 @@ pipeline {
                     docker build -t %IMAGE_NAME% .
                     docker push %IMAGE_NAME%
                 """
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
-            steps {
-                bat 'kubectl apply -f Depservice.yml'
             }
         }
     }
